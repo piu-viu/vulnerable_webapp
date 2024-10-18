@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .dashboard-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 700px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #333;
+            font-size: 1.8em;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+        }
+
+        .form-group label {
+            font-size: 1em;
+            color: #555;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        .form-group input:focus {
+            border-color: #74ebd5;
+            outline: none;
+            box-shadow: 0 0 8px rgba(116, 235, 213, 0.3);
+        }
+
+        .form-group button {
+            background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 30px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .form-group button:hover {
+            background: linear-gradient(135deg, #ACB6E5 0%, #74ebd5 100%);
+        }
+
+        .form-group button:active {
+            transform: scale(0.98);
+        }
+
+        .ping-result, .messages {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .ping-result pre {
+            background-color: #f1f1f1;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        .message-item {
+            padding: 10px;
+            background-color: #ffffff;
+            border-left: 5px solid #74ebd5;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .message-item strong {
+            color: #007BFF;
+        }
+
+        .form-title {
+            margin-top: 40px;
+            font-size: 1.2em;
+            color: #333;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="dashboard-container">
+    <h1>Welcome, {{ user }}</h1>
+
+    <!-- Ping form -->
+    <div class="form-group">
+        <form method="POST">
+            <label for="ip">Enter an IP to ping:</label>
+            <input type="text" id="ip" name="ip" placeholder="Enter IP address">
+            <button type="submit">Ping</button>
+        </form>
+        {% if ping_result %}
+        <div class="ping-result">
+            <h3>Ping Result:</h3>
+            <pre>{{ ping_result }}</pre>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Message form -->
+    <div class="form-group">
+        <form method="POST">
+            <label for="message">Post a message:</label>
+            <input type="text" id="message" name="message" placeholder="Type your message here...">
+            <button type="submit">Post</button>
+        </form>
+    </div>
+
+    <!-- Message Board -->
+    <h2 class="form-title">Message Board</h2>
+    <div class="messages">
+        {% for message in messages %}
+        <div class="message-item">
+            <strong>{{ message.username }}:</strong> {{ message.content|safe }}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+</body>
+</html>
