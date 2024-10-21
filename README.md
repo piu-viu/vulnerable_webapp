@@ -8,5 +8,7 @@ Web application available on port 5000, with vulnerabilities.
 Web application on port 5001 to fix vulnerabilities. Working on.
 
 
+# Applying the changes
+
 After you have made changes to the code, pushed them to git, and performed a `git pull` on the server, you need to run `systemctl restart vulnerable_webapp_5001.service` to apply these changes.
 
