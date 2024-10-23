@@ -35,10 +35,10 @@ def login():
         username = request.form['username']
         password = request.form['password']
         
-        # SQL injection vulnerability (PostgreSQL)
-        query = f"SELECT * FROM users WHERE username = '{username}' AND password = '{password}'"
+        # Sikker SQL-spørring med parametrisering for å unngå SQL injection
+        query = text("SELECT * FROM users WHERE username = :username AND password = :password")
         with db.engine.connect() as connection:
-            result = connection.execute(text(query)).fetchone()
+            result = connection.execute(query, {"username": username, "password": password}).fetchone()
 
         if result:
             session['user'] = result[1]
