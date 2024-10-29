@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.secret_key = 'supersecretkey'
 
 # PostgreSQL database URI format:
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://test:test@localhost/testdb'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://test:test@localhost/db5001'
 db = SQLAlchemy(app)
 
 # User model
