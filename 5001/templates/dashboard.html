@@ -156,7 +156,8 @@
     <div class="messages">
         {% for message in messages %}
         <div class="message-item">
-            <strong>{{ message.username }}:</strong> {{ message.content|safe }}
+            <!-- Fjernet |safe fra message.content, så det ikke lenger er raw-->
+            <strong>{{ message.username }}:</strong> {{ message.content }}
         </div>
         {% endfor %}
     </div>
